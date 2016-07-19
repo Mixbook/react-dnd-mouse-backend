@@ -175,7 +175,11 @@ export default class MouseBackend {
           clientOffset.y <= boundingRect.bottom
       })
 
-    this.actions.hover(matchingTargetIds, {
+    const sortedMatchingTargetIds = matchingTargetIds.sort((a, b) => {
+      return this.getParents(this.targetNodes[a]).indexOf(this.targetNodes[b]) !== -1 ? 1 : -1;
+    });
+
+    this.actions.hover(sortedMatchingTargetIds, {
       clientOffset
     })
   }
@@ -231,4 +235,12 @@ export default class MouseBackend {
     this.draggedSourceNode = null
   }
 
+  getParents(node) {
+    const els = [];
+    while (node) {
+      els.unshift(node);
+      node = node.parentNode;
+    }
+    return els;
+  }
 }
