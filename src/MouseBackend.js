@@ -129,6 +129,8 @@ export default class MouseBackend {
   }
 
   handleWindowMoveStart(e) {
+    // Fix bug when in Safari it shows as a text cursor while dragging
+    e.preventDefault();
     const clientOffset = getEventClientOffset(e)
     if (clientOffset) {
       this.mouseClientOffset = clientOffset
