@@ -133,6 +133,9 @@ export default class MouseBackend {
     if (e.target.tagName !== 'INPUT'
         && e.target.tagName !== 'SELECT'
         && e.target.tagName !== 'TEXTAREA'
+        && document.activeElement.tagName !== 'INPUT'
+        && document.activeElement.tagName !== 'SELECT'
+        && document.activeElement.tagName !== 'TEXTAREA'
         && !e.target.isContentEditable) {
       e.preventDefault();
     }
